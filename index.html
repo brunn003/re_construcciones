@@ -22,7 +22,7 @@
             --accent: #d90416;
             --accent-hover: #b80312;
             --bg-light: #f7f7f7;
-            --surface: #ffffff; /* Fondo blanco puro para coincidir con el fondo del logo */
+            --surface: #ffffff;
             --text-main: #111111;
             --text-muted: #5f5f5f;
             --border: #dedede;
@@ -122,7 +122,7 @@
         }
 
         /* =========================================================
-           HEADER & LOGO INTEGRADO
+           HEADER
         ========================================================= */
         .header {
             position: fixed;
@@ -143,19 +143,15 @@
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            background-color: transparent;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
         }
 
-        .logo-img {
-            height: 55px;
-            width: auto;
-            object-fit: contain;
-            /* Combina el fondo blanco de la imagen con el fondo del header */
-            mix-blend-mode: multiply; 
-            display: block;
+        .logo img {
+        height: 55px;
+        width: auto;
+        display: block;
         }
 
         .nav-menu {
@@ -189,14 +185,25 @@
            HERO
         ========================================================= */
         .hero {
-            position: relative;
-            padding: 160px 0 100px 0;
-            background:
-                linear-gradient(rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.86)),
-                url('https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1600&q=80')
-                center/cover no-repeat;
-            color: #ffffff;
-        }
+    position: relative;
+    min-height: 650px;
+    padding: 170px 0 100px;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.82) 0%,
+            rgba(0, 0, 0, 0.65) 45%,
+            rgba(0, 0, 0, 0.35) 100%
+        ),
+        url('hero.jpg');
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    color: #ffffff;
+}
 
         .hero-content {
             max-width: 800px;
@@ -336,11 +343,402 @@
         }
 
         /* =========================================================
+           PORTFOLIO
+        ========================================================= */
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background-color: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 260px;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.90), transparent);
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            transition: var(--transition);
+            color: #ffffff;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        /* =========================================================
+           LIGHTBOX
+        ========================================================= */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: var(--radius);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #ffffff;
+            font-size: 2.5rem;
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           PROCESO
+        ========================================================= */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        .process-card {
+            background-color: var(--surface);
+            padding: 2rem 1.5rem;
+            border-radius: var(--radius);
+            position: relative;
+            border-top: 4px solid var(--accent);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .process-step {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.15);
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+
+        .process-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .process-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* =========================================================
+           CTA
+        ========================================================= */
+        .cta-section {
+            background-color: var(--primary);
+            color: #ffffff;
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* =========================================================
+           CONTACTO
+        ========================================================= */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .info-icon {
+            width: 45px;
+            height: 45px;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .info-text h4 {
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .info-text p,
+        .info-text a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .contact-form {
+            background-color: var(--surface);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(217, 4, 22, 0.15);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* =========================================================
+           ZONA DE COBERTURA
+        ========================================================= */
+        .location-section {
+            background-color: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .coverage-map {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .coverage-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .coverage-info {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .coverage-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--bg-light);
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            font-weight: 600;
+        }
+
+        .coverage-badge i {
+            color: var(--accent);
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+        .footer {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 60px 0 20px 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+        }
+
+        .footer-title {
+            font-size: 1.1rem;
+            margin-bottom: 1.25rem;
+            color: #ffffff;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--primary-light);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        /* =========================================================
+           WHATSAPP
+        ========================================================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 999;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* =========================================================
            RESPONSIVE
         ========================================================= */
         @media (max-width: 992px) {
-            .about-grid {
+            .about-grid,
+            .contact-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -369,8 +767,20 @@
                 font-size: 2rem;
             }
 
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
             .values-list {
                 grid-template-columns: 1fr;
+            }
+
+            .coverage-map {
+                height: 400px;
             }
         }
 
@@ -395,6 +805,10 @@
                 width: 100%;
                 text-align: center;
             }
+
+            .coverage-map {
+                height: 350px;
+            }
         }
     </style>
 </head>
@@ -408,7 +822,7 @@
         <div class="container nav-container">
 
             <a href="#" class="logo">
-                <img src="logo.png" alt="RE Construcciones Logo" class="logo-img">
+                <img src="logo.png" alt="RE Construcciones">
             </a>
 
             <button class="hamburger" id="hamburger" aria-label="Menú de navegación">
@@ -620,7 +1034,7 @@
                 <div class="about-img-wrapper">
 
                     <img
-                        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+                        src="sobremi.jpg"
                         alt="Trabajos de construcción de RE Construcciones"
                         loading="lazy"
                     >
@@ -630,7 +1044,7 @@
                 <div class="about-text">
 
                     <h2 class="section-title">
-                        Sobre RE Construcciones
+                        RE Construcciones
                     </h2>
 
                     <p>
@@ -678,6 +1092,1137 @@
         </div>
 
     </section>
+
+    <!-- =========================================================
+         TRABAJOS REALIZADOS
+    ========================================================= -->
+    <section id="trabajos" class="section-padding">
+
+    <div class="container">
+
+        <div class="text-center">
+
+            <h2 class="section-title">
+                Trabajos realizados
+            </h2>
+
+            <p class="section-subtitle">
+                Conocé algunos de los trabajos realizados por RE Construcciones.
+                Calidad, compromiso y atención en cada proyecto.
+            </p>
+
+        </div>
+
+        <div class="portfolio-filters">
+
+            <button class="filter-btn active" data-filter="todos">
+                Todos
+            </button>
+
+            <button class="filter-btn" data-filter="reformas">
+                Reformas
+            </button>
+
+            <button class="filter-btn" data-filter="construccion">
+                Construcción
+            </button>
+
+            <button class="filter-btn" data-filter="pintura">
+                Pintura
+            </button>
+
+            <button class="filter-btn" data-filter="pisos">
+                Pisos y revestimientos
+            </button>
+
+        </div>
+
+
+        <div class="portfolio-grid">
+
+            <!-- REFORMA 1 -->
+            <div
+                class="portfolio-item"
+                data-category="reformas"
+                onclick="openLightbox('reformas.jpeg')"
+            >
+
+                <img
+                    src="reformas.jpeg"
+                    alt="Reforma integral de baño"
+                    loading="lazy"
+                >
+
+                <div class="portfolio-overlay">
+
+                    <h4>Ampliación de pieza</h4>
+
+                    <p>
+                        Construcción de habitacion
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- REFORMA 2 -->
+            <div
+                class="portfolio-item"
+                data-category="reformas"
+                onclick="openLightbox('cocina1.jpeg')"
+            >
+
+                <img
+                    src="cocina1.jpeg"
+                    alt="Reforma de cocina"
+                    loading="lazy"
+                >
+
+                <div class="portfolio-overlay">
+
+                    <h4>Reforma de Cocina</h4>
+
+                    <p>
+                        Acondicionamiento, revestimientos y mesadas
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONSTRUCCIÓN 1 -->
+            <div
+                class="portfolio-item"
+                data-category="construccion"
+                onclick="openLightbox('construccion.jpeg')"
+            >
+
+                <img
+                    src="construccion.jpeg"
+                    alt="Construcción de vivienda"
+                    loading="lazy"
+                >
+
+                <div class="portfolio-overlay">
+
+                    <h4>Construcción de vivienda</h4>
+
+                    <p>
+                        Construcción de nueva planta y ampliación de espacios
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONSTRUCCIÓN 2 -->
+            <div
+                class="portfolio-item"
+                data-category="construccion"
+                onclick="openLightbox('construccion2.jpeg')"
+            >
+
+                <img
+                    src="ampliacion.jpeg"
+                    alt="Construcción de muros"
+                    loading="lazy"
+                >
+
+                <div class="portfolio-overlay">
+
+                    <h4>Construcción de Muros</h4>
+
+                    <p>
+                        Levantamiento de muros y trabajos de albañilería
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PINTURA 1 -->
+            <div
+                class="portfolio-item"
+                data-category="pintura"
+                onclick="openLightbox('azotea.jpeg')"
+            >
+
+                <img
+                    src="azotea.jpeg"
+                    alt="Impermeabilización y pintura de azotea"
+                    loading="lazy"
+                >
+
+                <div class="portfolio-overlay">
+
+                    <h4>Impermeabilización de Azotea</h4>
+
+                    <p>
+                        Tratamiento, impermeabilización y pintura
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PINTURA 2 -->
+            <div
+                class="portfolio-item"
+                data-category="pintura"
+                onclick="openLightbox('pintura.jpeg')"
+            >
+
+                <img
+                    src="isopanel.jpeg"
+                    alt="Techado con isopanel"
+                    loading="lazy"
+                >
+
+                <div class="portfolio-overlay">
+
+                    <h4>Isopanel</h4>
+
+                    <p>
+                        Techado con isopanel
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PISOS 1 -->
+            <div
+                class="portfolio-item"
+                data-category="pisos"
+                onclick="openLightbox('revestimiento.jpeg')"
+            >
+
+                <img
+                    src="revestimiento.jpeg"
+                    alt="Colocación de porcelanato"
+                    loading="lazy"
+                >
+
+                <div class="portfolio-overlay">
+
+                    <h4>Colocación de Porcelanato</h4>
+
+                    <p>
+                        Instalación de pisos interiores
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PISOS 2 -->
+            <div
+                class="portfolio-item"
+                data-category="pisos"
+                onclick="openLightbox('pisos2.jpeg')"
+            >
+
+                <img
+                    src="revestimiento3.jpeg"
+                    alt="Colocación de revestimientos"
+                    loading="lazy"
+                >
+
+                <div class="portfolio-overlay">
+
+                    <h4>Revestimiento de paredes</h4>
+
+                    <p>
+                        Colocación y renovación de superficies
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+
+        <span class="lightbox-close">
+            &times;
+        </span>
+
+        <img
+            class="lightbox-img"
+            id="lightbox-img"
+            src=""
+            alt="Ampliación del trabajo realizado"
+        >
+
+    </div>
+
+    <!-- =========================================================
+         PROCESO DE TRABAJO
+    ========================================================= -->
+    <section class="section-padding" style="background-color: var(--surface);">
+
+        <div class="container">
+
+            <div class="text-center">
+
+                <h2 class="section-title">
+                    ¿Cómo trabajamos?
+                </h2>
+
+                <p class="section-subtitle">
+                    Un proceso claro y transparente desde la primera consulta
+                    hasta la entrega de la obra.
+                </p>
+
+            </div>
+
+            <div class="process-grid">
+
+                <div class="process-card">
+
+                    <span class="process-step">
+                        01
+                    </span>
+
+                    <h3 class="process-title">
+                        Contacto
+                    </h3>
+
+                    <p class="process-desc">
+                        Nos contás qué proyecto o reforma tenés en mente
+                        mediante nuestro formulario o por WhatsApp.
+                    </p>
+
+                </div>
+
+                <div class="process-card">
+
+                    <span class="process-step">
+                        02
+                    </span>
+
+                    <h3 class="process-title">
+                        Visita y evaluación
+                    </h3>
+
+                    <p class="process-desc">
+                        Coordinamos una visita técnica para evaluar el lugar,
+                        tomar medidas y entender bien las características del trabajo.
+                    </p>
+
+                </div>
+
+                <div class="process-card">
+
+                    <span class="process-step">
+                        03
+                    </span>
+
+                    <h3 class="process-title">
+                        Presupuesto
+                    </h3>
+
+                    <p class="process-desc">
+                        Te presentamos una propuesta detallada y transparente,
+                        adaptada a tus necesidades y presupuesto.
+                    </p>
+
+                </div>
+
+                <div class="process-card">
+
+                    <span class="process-step">
+                        04
+                    </span>
+
+                    <h3 class="process-title">
+                        Ejecución
+                    </h3>
+
+                    <p class="process-desc">
+                        Iniciamos las obras cuidando el orden, los plazos
+                        y manteniendo comunicación fluida durante todo el proceso.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================================================
+         CTA
+    ========================================================= -->
+    <section class="cta-section">
+
+        <div class="container">
+
+            <h2 class="cta-title">
+                ¿Necesitás una solución para tu obra?
+            </h2>
+
+            <p class="cta-text">
+                Contactanos para consultar por un trabajo, reparación o presupuesto.
+                También contamos con atención de urgencias las 24 horas.
+            </p>
+
+            <a href="#contacto" class="btn btn-primary">
+                Solicitar presupuesto
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- =========================================================
+         CONTACTO
+    ========================================================= -->
+    <section id="contacto" class="section-padding">
+
+        <div class="container">
+
+            <div class="text-center">
+
+                <h2 class="section-title">
+                    Contacto
+                </h2>
+
+                <p class="section-subtitle">
+                    Escribinos o llamanos para consultar por servicios,
+                    reparaciones, urgencias o presupuestos.
+                </p>
+
+            </div>
+
+            <div class="contact-grid">
+
+                <div class="contact-info">
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+
+                        <div class="info-text">
+
+                            <h4>Teléfono</h4>
+
+                            <p>
+                                <a href="tel:+59896744829">
+                                    096 744 829
+                                </a>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+
+                        <div class="info-text">
+
+                            <h4>WhatsApp</h4>
+
+                            <p>
+                                <a
+                                    href="https://wa.me/59896744829?text=Hola,%20quisiera%20consultar%20por%20un%20presupuesto"
+                                    target="_blank"
+                                >
+                                    Enviar mensaje por WhatsApp
+                                </a>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+
+                        <div class="info-text">
+
+                            <h4>Correo electrónico</h4>
+
+                            <p>
+                                <a href="mailto:riveroezequielconstrucciones@gmail.com">
+                                    riveroezequielconstrucciones@gmail.com
+                                </a>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+
+                        <div class="info-text">
+
+                            <h4>Instagram</h4>
+
+                            <p>
+                                <a
+                                    href="https://instagram.com/reconstrucciones_uy"
+                                    target="_blank"
+                                >
+                                    @reconstrucciones_uy
+                                </a>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            <i class="fa-brands fa-facebook"></i>
+                        </div>
+
+                        <div class="info-text">
+
+                            <h4>Facebook</h4>
+
+                            <p>
+                                <a href="#" target="_blank">
+                                    RE Construcciones
+                                </a>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+
+                        <div class="info-text">
+
+                            <h4>Zona de trabajo</h4>
+
+                            <p>
+                                Montevideo y Canelones.
+                                Consultanos por disponibilidad y zona de trabajo.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+
+                        <div class="info-text">
+
+                            <h4>Horarios de atención</h4>
+
+                            <p>
+                                Lunes a Viernes: 08:00 - 18:00 hs<br>
+                                Sábados: 08:00 - 13:00 hs
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- FORMULARIO -->
+
+                <form
+                    class="contact-form"
+                    id="presupuesto-form"
+                    onsubmit="handleFormSubmit(event)"
+                >
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label class="form-label" for="nombre">
+                                Nombre completo *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nombre"
+                                class="form-control"
+                                required
+                                placeholder="Tu nombre"
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label class="form-label" for="telefono">
+                                Teléfono / WhatsApp *
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="telefono"
+                                class="form-control"
+                                required
+                                placeholder="09X XXX XXX"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label class="form-label" for="email">
+                                Correo electrónico
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                class="form-control"
+                                placeholder="tuemail@ejemplo.com"
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label class="form-label" for="tipo_trabajo">
+                                Tipo de trabajo *
+                            </label>
+
+                            <select
+                                id="tipo_trabajo"
+                                class="form-control"
+                                required
+                            >
+
+                                <option value="">
+                                    Seleccioná una opción
+                                </option>
+
+                                <option value="reforma">
+                                    Reforma integral / parcial
+                                </option>
+
+                                <option value="construccion">
+                                    Construcción / Ampliación
+                                </option>
+
+                                <option value="albanileria">
+                                    Albañilería general
+                                </option>
+
+                                <option value="sanitaria">
+                                    Sanitaria
+                                </option>
+
+                                <option value="electricidad">
+                                    Electricidad
+                                </option>
+
+                                <option value="yeso">
+                                    Yeso
+                                </option>
+
+                                <option value="herreria">
+                                    Herrería
+                                </option>
+
+                                <option value="impermeabilizacion">
+                                    Impermeabilización
+                                </option>
+
+                                <option value="techado">
+                                    Techado Isopanel
+                                </option>
+
+                                <option value="pintura">
+                                    Pintura
+                                </option>
+
+                                <option value="pisos">
+                                    Pisos y revestimientos
+                                </option>
+
+                                <option value="mantenimiento">
+                                    Mantenimiento
+                                </option>
+
+                                <option value="otro">
+                                    Otro
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="form-label" for="ubicacion">
+                            Barrio / Localidad *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="ubicacion"
+                            class="form-control"
+                            required
+                            placeholder="Ej: Pocitos, Las Piedras, Ciudad de la Costa, etc."
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="form-label" for="descripcion">
+                            Detalles del proyecto *
+                        </label>
+
+                        <textarea
+                            id="descripcion"
+                            class="form-control"
+                            required
+                            placeholder="Contanos brevemente qué necesitás hacer..."
+                        ></textarea>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        style="width: 100%;"
+                    >
+                        Solicitar presupuesto
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================================================
+         ZONA DE COBERTURA
+         MONTEVIDEO + CANELONES
+    ========================================================= -->
+    <section class="section-padding location-section">
+
+        <div class="container">
+
+            <div class="text-center">
+
+                <h2 class="section-title">
+                    Zona de cobertura
+                </h2>
+
+                <p class="section-subtitle">
+                    Trabajamos principalmente en Montevideo y Canelones.
+                    Consultanos por disponibilidad para tu zona.
+                </p>
+
+            </div>
+
+            <!-- MAPA AMPLIADO PARA MOSTRAR MONTEVIDEO Y CANELONES -->
+
+            <div class="coverage-map">
+
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d209536.25752548944!2d-56.169!3d-34.82!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959f800b6c1f8f87%3A0x6d7b6f8f7e9e6f4!2sMontevideo%2C%20Uruguay!5e0!3m2!1ses!2suy!4v1700000000000!5m2!1ses!2suy"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+            </div>
+
+            <div class="coverage-info">
+
+                <div class="coverage-badge">
+                    <i class="fa-solid fa-location-dot"></i>
+                    Montevideo
+                </div>
+
+                <div class="coverage-badge">
+                    <i class="fa-solid fa-location-dot"></i>
+                    Canelones
+                </div>
+
+                <div class="coverage-badge">
+                    <i class="fa-solid fa-house"></i>
+                    Obras y reformas
+                </div>
+
+                <div class="coverage-badge">
+                    <i class="fa-solid fa-truck"></i>
+                    Consultá por tu zona
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+
+                    <a href="#" class="logo" style="color: #ffffff;">
+
+                        <i class="fa-solid fa-helmet-safety"></i>
+
+                        <span>
+                            RE Construcciones
+                        </span>
+
+                    </a>
+
+                    <p>
+                        Construcción, reformas, instalaciones y reparaciones.
+                        Materiales de calidad, garantía y trabajo prolijo y limpio.
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h4 class="footer-title">
+                        Enlaces rápidos
+                    </h4>
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="#inicio">
+                                Inicio
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#servicios">
+                                Servicios
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#nosotros">
+                                Sobre nosotros
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#trabajos">
+                                Trabajos realizados
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#contacto">
+                                Contacto
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <h4 class="footer-title">
+                        Servicios principales
+                    </h4>
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="#servicios">
+                                Albañilería
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#servicios">
+                                Sanitaria
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#servicios">
+                                Electricidad
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#servicios">
+                                Yeso y herrería
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#servicios">
+                                Impermeabilización
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <h4 class="footer-title">
+                        Contacto
+                    </h4>
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <i class="fa-solid fa-phone"></i>
+                            096 744 829
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-envelope"></i>
+                            riveroezequielconstrucciones@gmail.com
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            Montevideo y Canelones
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <p>
+                    &copy; 2026 RE Construcciones.
+                    Todos los derechos reservados.
+                    | Empresa Unipersonal - Uruguay
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- =========================================================
+         WHATSAPP
+    ========================================================= -->
+
+    <a
+        href="https://wa.me/59896744829?text=Hola,%20estoy%20visitando%20la%20p%C3%A1gina%20web%20y%20quisiera%20consultar%20por%20un%20presupuesto."
+        class="whatsapp-float"
+        target="_blank"
+        aria-label="Contacto por WhatsApp"
+    >
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
+    <script>
+
+        /* =====================================================
+           FUNCIÓN PARA OBTENER ELEMENTOS
+        ===================================================== */
+
+        function id(elementId) {
+            return document.getElementById(elementId);
+        }
+
+
+        /* =====================================================
+           MENÚ HAMBURGUESA
+        ===================================================== */
+
+        const hamburger = id('hamburger');
+        const navMenu = id('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+
+            navMenu.classList.toggle('active');
+
+        });
+
+
+        /* =====================================================
+           CERRAR MENÚ AL SELECCIONAR OPCIÓN
+        ===================================================== */
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+
+            link.addEventListener('click', () => {
+
+                navMenu.classList.remove('active');
+
+            });
+
+        });
+
+
+        /* =====================================================
+           FILTRO DE GALERÍA
+        ===================================================== */
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+
+            btn.addEventListener('click', () => {
+
+                filterBtns.forEach(b => {
+                    b.classList.remove('active');
+                });
+
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+
+                    if (
+                        filter === 'todos' ||
+                        item.getAttribute('data-category') === filter
+                    ) {
+
+                        item.style.display = 'block';
+
+                    } else {
+
+                        item.style.display = 'none';
+
+                    }
+
+                });
+
+            });
+
+        });
+
+
+        /* =====================================================
+           LIGHTBOX
+        ===================================================== */
+
+        function openLightbox(imgUrl) {
+
+            id('lightbox-img').src = imgUrl;
+
+            id('lightbox').classList.add('active');
+
+        }
+
+
+        function closeLightbox() {
+
+            id('lightbox').classList.remove('active');
+
+        }
+
+
+        /* =====================================================
+           FORMULARIO → WHATSAPP
+        ===================================================== */
+
+        function handleFormSubmit(event) {
+
+            event.preventDefault();
+
+            const nombre = id('nombre').value;
+            const telefono = id('telefono').value;
+            const email = id('email').value;
+
+            const trabajo =
+                id('tipo_trabajo')
+                .options[id('tipo_trabajo').selectedIndex]
+                .text;
+
+            const ubicacion = id('ubicacion').value;
+            const descripcion = id('descripcion').value;
+
+            const mensaje =
+                `Hola! Mi nombre es ${nombre}. Quisiera solicitar un presupuesto.%0A%0A` +
+
+                `*Servicio:* ${trabajo}%0A` +
+
+                `*Ubicación:* ${ubicacion}%0A` +
+
+                `*Teléfono:* ${telefono}%0A` +
+
+                `*Correo:* ${email || 'No indicado'}%0A` +
+
+                `*Detalles:* ${descripcion}`;
+
+            const whatsappUrl =
+                `https://wa.me/59896744829?text=${mensaje}`;
+
+            alert(
+                '¡Gracias por tu mensaje! Serás redirigido a WhatsApp para enviar la consulta directamente.'
+            );
+
+            window.open(
+                whatsappUrl,
+                '_blank'
+            );
+
+        }
+
+    </script>
 
 </body>
 </html>
